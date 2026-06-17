@@ -429,7 +429,13 @@
                     tempor incididunt ut labore et dolore magna aliqua.
                 </p>
 
-                <form class="contact__form" id="contactForm" novalidate>
+                <form class="contact__form" id="contactForm" name="contact" method="POST" data-netlify="true"
+                    data-netlify-recaptcha="true" netlify-honeypot="bot-field" novalidate>
+                    <input type="hidden" name="form-name" value="contact" />
+                    <p class="field--full" hidden aria-hidden="true">
+                        <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1"
+                                autocomplete="off" /></label>
+                    </p>
                     <div class="field">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" placeholder="Your name" required />
@@ -441,6 +447,9 @@
                     <div class="field field--full">
                         <label for="message">Message</label>
                         <textarea id="message" name="message" rows="4" placeholder="Your message" required></textarea>
+                    </div>
+                    <div class="field--full contact__recaptcha">
+                        <div data-netlify-recaptcha="true"></div>
                     </div>
                     <div class="field--full contact__submit-row">
                         <button type="submit" class="btn btn--solid">Send message</button>

@@ -856,6 +856,15 @@ p {
     margin-top: 0.2rem;
 }
 
+.contact__recaptcha {
+    margin-top: 0.4rem;
+    min-height: 78px;
+}
+
+.contact__recaptcha > div {
+    display: inline-block;
+}
+
 .form-note {
     font-family: var(--ui);
     font-size: 0.9rem;

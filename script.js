@@ -116,10 +116,9 @@
         progressEls.forEach(fill);
     }
 
-    /* ---------- contact form -> mailto ---------- */
+    /* ---------- contact form -> Netlify Forms (AJAX) ---------- */
     const form = document.getElementById("contactForm");
     const note = document.getElementById("formNote");
-    const RECIPIENT = "hello@example.com";
 
     if (form) {
         form.addEventListener("submit", function (e) {
@@ -131,22 +130,37 @@
                 return;
             }
 
-            const name = form.elements.name.value.trim();
-            const email = form.elements.email.value.trim();
-            const message = form.elements.message.value.trim();
+            // Netlify injects the reCAPTCHA widget (and its g-recaptcha-response
+            // field) at deploy time; only enforce it when the widget is present.
+            const captcha = form.querySelector("[name='g-recaptcha-response']");
+            if (captcha && !captcha.value) {
+                if (note) note.textContent = "Please complete the reCAPTCHA below.";
+                return;
+            }
 
-            const subject = "A note from " + name + " (via your website)";
-            const body =
-                message + "\n\n— " + name + "\n" + email;
+            const data = new URLSearchParams(new FormData(form)).toString();
+            const submitBtn = form.querySelector("button[type='submit']");
 
-            const mailto =
-                "mailto:" + RECIPIENT +
-                "?subject=" + encodeURIComponent(subject) +
-                "&body=" + encodeURIComponent(body);
+            if (note) note.textContent = "Sending…";
+            if (submitBtn) submitBtn.disabled = true;
 
-            window.location.href = mailto;
-            if (note) note.textContent = "Opening your email app…";
-            form.reset();
+            fetch(form.getAttribute("action") || "/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: data,
+            })
+                .then(function (res) {
+                    if (!res.ok) throw new Error("Bad response: " + res.status);
+                    if (note) note.textContent = "Thanks! Your message is on its way.";
+                    form.reset();
+                })
+                .catch(function () {
+                    if (note) note.textContent =
+                        "Sorry, something went wrong — please try again in a moment.";
+                })
+                .finally(function () {
+                    if (submitBtn) submitBtn.disabled = false;
+                });
         });
     }
 
