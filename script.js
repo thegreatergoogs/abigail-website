@@ -89,33 +89,6 @@
         reveals.forEach(function (el) { el.classList.add("is-visible"); });
     }
 
-    /* ---------- animated progress bars ---------- */
-    const progressEls = Array.from(document.querySelectorAll(".progress"));
-    function fill(el) {
-        const pct = Math.max(0, Math.min(100, Number(el.dataset.progress) || 0));
-        const bar = el.querySelector(".progress__bar");
-        if (bar) {
-            // next frame so the transition runs from 0
-            requestAnimationFrame(function () { bar.style.width = pct + "%"; });
-        }
-    }
-    if ("IntersectionObserver" in window && progressEls.length) {
-        const barObserver = new IntersectionObserver(
-            function (entries, obs) {
-                entries.forEach(function (entry) {
-                    if (entry.isIntersecting) {
-                        fill(entry.target);
-                        obs.unobserve(entry.target);
-                    }
-                });
-            },
-            { threshold: 0.5 }
-        );
-        progressEls.forEach(function (el) { barObserver.observe(el); });
-    } else {
-        progressEls.forEach(fill);
-    }
-
     /* ---------- contact form -> Netlify Forms (AJAX) ---------- */
     const form = document.getElementById("contactForm");
     const note = document.getElementById("formNote");

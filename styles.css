@@ -1,6 +1,6 @@
 /* =========================================================
-   Abigail Tyson — author website template
-   Palette: lilac paper, plum ink, violet, hot pink, teal
+   Abigail Tyson — YA writer
+   Palette: violet, lavender, teal, pink, green, sunshine yellow
    Type:   Fraunces (display) · Spectral (body) · Work Sans (UI)
    ========================================================= */
 
@@ -12,11 +12,14 @@
     --paper-3: #e9e1f7;
     --ink: #241b33;
     --ink-soft: #5c5273;
-    --forest: #6b4ee6;
-    --forest-deep: #5436c9;
-    --terracotta: #f4568d;
-    --terracotta-d: #d12d6e;
-    --gold: #17c0b0;
+    --forest: #7a5cf0;
+    --forest-deep: #573bc4;
+    --terracotta: #ff6189;
+    --terracotta-d: #cc2b58;
+    --gold: #78dde8;
+    --lilac: #ab9df2;
+    --leaf: #a9dc76;
+    --sun: #ffd966;
     --line: rgba(36, 27, 51, 0.14);
     --line-soft: rgba(36, 27, 51, 0.08);
 
@@ -50,8 +53,8 @@ body {
     margin: 0;
     background-color: var(--paper);
     background-image:
-        radial-gradient(circle at 18% 12%, rgba(107, 78, 230, 0.08), transparent 42%),
-        radial-gradient(circle at 86% 78%, rgba(244, 86, 141, 0.08), transparent 46%);
+        radial-gradient(circle at 18% 12%, rgba(122, 92, 240, 0.09), transparent 42%),
+        radial-gradient(circle at 86% 78%, rgba(120, 221, 232, 0.12), transparent 46%);
     color: var(--ink);
     font-family: var(--body);
     font-size: clamp(1rem, 0.96rem + 0.2vw, 1.12rem);
@@ -167,7 +170,7 @@ p {
     --c: var(--forest);
     background: var(--forest);
     color: var(--paper-2);
-    box-shadow: 0 12px 26px -16px rgba(84, 54, 201, 0.55);
+    box-shadow: 0 12px 26px -16px rgba(87, 59, 196, 0.5);
 }
 
 .btn--solid:hover {
@@ -671,7 +674,7 @@ p {
 .work-card:hover {
     transform: translateY(-6px);
     box-shadow: var(--shadow);
-    border-color: rgba(107, 78, 230, 0.45);
+    border-color: rgba(122, 92, 240, 0.45);
 }
 
 .work-card__top {
@@ -694,8 +697,8 @@ p {
     text-transform: uppercase;
     letter-spacing: 0.14em;
     color: var(--terracotta-d);
-    background: rgba(244, 86, 141, 0.14);
-    border: 1px solid rgba(244, 86, 141, 0.32);
+    background: rgba(255, 97, 137, 0.14);
+    border: 1px solid rgba(255, 97, 137, 0.34);
     padding: 0.3rem 0.7rem;
     border-radius: 999px;
 }
@@ -845,7 +848,7 @@ p {
 .field textarea:focus {
     outline: none;
     border-color: var(--forest);
-    box-shadow: 0 0 0 3px rgba(107, 78, 230, 0.18);
+    box-shadow: 0 0 0 3px rgba(122, 92, 240, 0.2);
 }
 
 .contact__submit-row {
@@ -861,7 +864,7 @@ p {
     min-height: 78px;
 }
 
-.contact__recaptcha > div {
+.contact__recaptcha>div {
     display: inline-block;
 }
 
@@ -1061,4 +1064,124 @@ p {
         opacity: 1;
         transform: none;
     }
+}
+
+/* =========================================================
+   SOME FAVORITES
+   ========================================================= */
+.favorites__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.4rem, 4vw, 2.4rem) clamp(1.6rem, 5vw, 3.2rem);
+}
+
+@media (max-width: 680px) {
+    .favorites__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.favorite__label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--ui);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--forest-deep);
+    margin: 0 0 0.7rem;
+}
+
+.favorite__label svg {
+    color: var(--forest);
+    flex: none;
+}
+
+.favorite:nth-child(2) .favorite__label svg {
+    color: var(--terracotta);
+}
+
+.favorite:nth-child(3) .favorite__label svg {
+    color: var(--gold);
+}
+
+.favorite:nth-child(4) .favorite__label svg {
+    color: var(--leaf);
+}
+
+.favorite__list {
+    margin: 0;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+.favorite__list em {
+    color: var(--ink);
+    font-style: italic;
+}
+
+.favorites__note {
+    max-width: 640px;
+    margin: clamp(2rem, 5vw, 3rem) auto 0;
+    text-align: center;
+    font-size: 0.92rem;
+    font-style: italic;
+    color: var(--ink-soft);
+}
+
+/* =========================================================
+   CURRENT PROJECT (single feature card)
+   ========================================================= */
+.works__grid--single {
+    grid-template-columns: minmax(0, 720px);
+    justify-content: center;
+}
+
+.work-card--feature .work-card__title {
+    font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.2rem);
+}
+
+.work-card--feature .work-card__genre {
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 0.95rem;
+    color: var(--terracotta-d);
+}
+
+.work-card__playlist {
+    margin-top: 0.4rem;
+}
+
+.work-card__playlist iframe {
+    display: block;
+    width: 100%;
+    border: 0;
+}
+
+.work-card__playlist-link {
+    margin: 0.7rem 0 0;
+    font-family: var(--ui);
+    font-size: 0.85rem;
+}
+
+.work-card__playlist-link a {
+    color: var(--forest-deep);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.work-card__playlist-link a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- contact note ---------- */
+.contact__note {
+    margin-top: -0.4rem;
+    text-align: center;
+    font-family: var(--ui);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--forest-deep);
 }
